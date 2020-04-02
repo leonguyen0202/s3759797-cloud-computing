@@ -89,7 +89,7 @@
                                             <div class="widget-content-wrapper">
                                                 <div class="widget-content-left mr-3">
                                                     <img width="42" class="rounded-circle"
-                                                        src="assets/images/avatars/9.jpg" alt="">
+                                                        src="{{asset('images/avatars/9.jpg')}}" alt="">
                                                 </div>
                                                 <div class="widget-content-left">
                                                     <div class="widget-heading">Ella-Rose Henry
@@ -114,7 +114,7 @@
                                             <div class="widget-content-wrapper">
                                                 <div class="widget-content-left mr-3">
                                                     <img width="42" class="rounded-circle"
-                                                        src="assets/images/avatars/5.jpg" alt="">
+                                                        src="{{asset('images/avatars/5.jpg')}}" alt="">
                                                 </div>
                                                 <div class="widget-content-left">
                                                     <div class="widget-heading">Ruben Tillman</div>
@@ -137,7 +137,7 @@
                                             <div class="widget-content-wrapper">
                                                 <div class="widget-content-left mr-3">
                                                     <img width="42" class="rounded-circle"
-                                                        src="assets/images/avatars/4.jpg" alt="">
+                                                        src="{{asset('images/avatars/4.jpg')}}" alt="">
                                                 </div>
                                                 <div class="widget-content-left">
                                                     <div class="widget-heading">Vinnie Wagstaff
@@ -162,7 +162,7 @@
                                             <div class="widget-content-wrapper">
                                                 <div class="widget-content-left mr-3">
                                                     <img width="42" class="rounded-circle"
-                                                        src="assets/images/avatars/3.jpg" alt="">
+                                                        src="{{asset('images/avatars/3.jpg')}}" alt="">
                                                 </div>
                                                 <div class="widget-content-left">
                                                     <div class="widget-heading">Ella-Rose Henry
@@ -187,7 +187,7 @@
                                             <div class="widget-content-wrapper">
                                                 <div class="widget-content-left mr-3">
                                                     <img width="42" class="rounded-circle"
-                                                        src="assets/images/avatars/2.jpg" alt="">
+                                                        src="{{asset('images/avatars/2.jpg')}}" alt="">
                                                 </div>
                                                 <div class="widget-content-left">
                                                     <div class="widget-heading">Ruben Tillman</div>
@@ -449,7 +449,7 @@
                                     <div class="widget-content-wrapper">
                                         <div class="widget-content-left mr-3">
                                             <div class="widget-content-left">
-                                                <img width="40" class="rounded-circle" src="assets/images/avatars/4.jpg"
+                                                <img width="40" class="rounded-circle" src="{{asset('images/avatars/4.jpg')}}"
                                                     alt="">
                                             </div>
                                         </div>
@@ -477,7 +477,7 @@
                                     <div class="widget-content-wrapper">
                                         <div class="widget-content-left mr-3">
                                             <div class="widget-content-left">
-                                                <img width="40" class="rounded-circle" src="assets/images/avatars/3.jpg"
+                                                <img width="40" class="rounded-circle" src="{{asset('images/avatars/3.jpg')}}"
                                                     alt="">
                                             </div>
                                         </div>
@@ -505,7 +505,7 @@
                                     <div class="widget-content-wrapper">
                                         <div class="widget-content-left mr-3">
                                             <div class="widget-content-left">
-                                                <img width="40" class="rounded-circle" src="assets/images/avatars/2.jpg"
+                                                <img width="40" class="rounded-circle" src="{{asset('images/avatars/2.jpg')}}"
                                                     alt="">
                                             </div>
                                         </div>
@@ -533,7 +533,7 @@
                                     <div class="widget-content-wrapper">
                                         <div class="widget-content-left mr-3">
                                             <div class="widget-content-left">
-                                                <img width="40" class="rounded-circle" src="assets/images/avatars/1.jpg"
+                                                <img width="40" class="rounded-circle" src="{{asset('images/avatars/1.jpg')}}"
                                                     alt=""></div>
                                         </div>
                                         <div class="widget-content-left flex2">

@@ -174,7 +174,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="tables-regular.html">
+                    <a href="{{route('lecturer.index')}}">
                         <i class="metismenu-icon pe-7s-display2"></i>
                         Lecturers
                     </a>
