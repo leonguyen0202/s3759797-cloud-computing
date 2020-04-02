@@ -37,7 +37,7 @@
                 <li>
                     <a href="index.html" class="mm-active">
                         <i class="metismenu-icon pe-7s-rocket"></i>
-                        Dashboard Example 1
+                        Dashboard
                     </a>
                 </li>
                 <li class="app-sidebar__heading">UI Components</li>
@@ -210,14 +210,6 @@
                     <a href="charts-chartjs.html">
                         <i class="metismenu-icon pe-7s-graph2">
                         </i>ChartJS
-                    </a>
-                </li>
-                <li class="app-sidebar__heading">PRO Version</li>
-                <li>
-                    <a href="https://dashboardpack.com/theme-details/architectui-dashboard-html-pro/" target="_blank">
-                        <i class="metismenu-icon pe-7s-graph2">
-                        </i>
-                        Upgrade to PRO
                     </a>
                 </li>
             </ul>

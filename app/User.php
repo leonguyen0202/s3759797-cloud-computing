@@ -10,6 +10,20 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    public function getKeyType()
+    {
+        return 'string';
+    }
+
+    protected $table = 'users';
+
+    protected $primaryKey = 'id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,4 +50,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            do {
+                $model->id = (string) Uuid::generate(4);
+            } while ($model->where($model->getKeyName(), $model->id)->first() != null);
+        });
+    }
 }
