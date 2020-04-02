@@ -176,7 +176,7 @@
                 <li>
                     <a href="tables-regular.html">
                         <i class="metismenu-icon pe-7s-display2"></i>
-                        Tables
+                        Lecturers
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Widgets</li>
