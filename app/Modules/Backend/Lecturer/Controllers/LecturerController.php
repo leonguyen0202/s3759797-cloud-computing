@@ -67,8 +67,6 @@ class LecturerController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-
         $validator = \Validator::make($request->all(), [
             'first_name' => 'required|min:3|string',
             'last_name' => 'required|min:3|string',
@@ -154,7 +152,6 @@ class LecturerController extends Controller
 
         foreach (range(1, $request->input('data')) as $i) {
             Lecturer::create([
-                // 'id' => \Webpatser\Uuid\Uuid::generate(4),
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
                 'gender' => $faker->randomElement(['M', 'F']),
