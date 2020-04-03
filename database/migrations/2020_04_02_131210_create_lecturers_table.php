@@ -17,9 +17,11 @@ class CreateLecturersTable extends Migration
             $table->uuid('id')->primary();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('address');
 
             $table->string('gender');
             $table->integer('age');
+            $table->string('phone_number');
             $table->timestamps();
         });
     }

@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Dashboard\Lecturer\Model\Lecturer;
+use App\Modules\Backend\Lecturer\Models\Lecturer;
 use Illuminate\Contracts\Support\Responsable;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -34,7 +34,7 @@ class LecturerExport extends DefaultValueBinder implements WithCustomValueBinder
      * It's required to define the fileName within
      * the export class when making use of Responsable.
      */
-    private $fileName = 'lecturers.csv';
+    private $fileName = 'Employees.csv';
 
     /**
      * Optional Writer Type
@@ -59,7 +59,8 @@ class LecturerExport extends DefaultValueBinder implements WithCustomValueBinder
             'Last name',
             'Gender',
             'Age',
-            'Update at',
+            'Address',
+            'Phone Number',
         ];
     }
 
@@ -90,7 +91,8 @@ class LecturerExport extends DefaultValueBinder implements WithCustomValueBinder
             $lecturer->last_name,
             $lecturer->gender,
             $lecturer->age,
-            $lecturer->updated_at,
+            $lecturer->address,
+            $lecturer->phone_number,
         ];
     }
 }

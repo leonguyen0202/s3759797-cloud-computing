@@ -93,13 +93,47 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// require('./bootstrap');
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 clearModalOnClose('lecturerModal');
 $(document).ready(function () {
+  $('#big-query').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: '/dashboard/big-query/dataTables',
+    "pagingType": "full_numbers",
+    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    columns: [{
+      data: 'name',
+      name: 'name'
+    }, {
+      data: 'gender',
+      name: 'gender'
+    }, {
+      data: 'frequency',
+      name: 'frequency'
+    }, {
+      data: 'year',
+      name: 'year'
+    }, {
+      data: 'action',
+      className: "text-center",
+      orderable: false,
+      searchable: false
+    }],
+    responsive: true,
+    language: {
+      search: "_INPUT_",
+      searchPlaceholder: "Search records"
+    }
+  });
   $('#lecturers').DataTable({
     processing: true,
     serverSide: true,
-    ajax: '/dashboard/lecturer/list',
+    ajax: '/dashboard/lecturer/dataTables',
     "pagingType": "full_numbers",
     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
     columns: [{
@@ -139,6 +173,8 @@ $(document).ready(function () {
       var last_name = document.getElementById('last_name').value;
       var age = document.getElementById('age').value;
       var gender = $("input[name=gender]:checked").val();
+      var phone_number = document.getElementById('phone_number').value;
+      var address = document.getElementById('address').value;
       $.ajax({
         url: '/dashboard/lecturer',
         method: "POST",
@@ -147,7 +183,8 @@ $(document).ready(function () {
           'last_name': last_name,
           'age': age,
           'gender': gender,
-          '_token': $('input[name=_token]').val()
+          'phone_number': phone_number,
+          'address': address
         },
         beforeSend: function beforeSend() {
           Swal.fire({
@@ -166,8 +203,10 @@ $(document).ready(function () {
           Swal.disableLoading(); // console.log(data);
 
           if (data.errors) {
+            Swal.close();
             forEachError(data);
           } else if (data.message) {
+            Swal.close();
             displayErrorMessage(data.message);
           } else {
             $(".lecturerModal").hide();
@@ -199,6 +238,8 @@ $(document).ready(function () {
       var last_name = document.getElementById('last_name').value;
       var age = document.getElementById('age').value;
       var gender = $("input[name=gender]:checked").val();
+      var phone_number = document.getElementById('phone_number').value;
+      var address = document.getElementById('address').value;
       $.ajax({
         url: '/dashboard/lecturer/update',
         method: "PUT",
@@ -208,7 +249,8 @@ $(document).ready(function () {
           'last_name': last_name,
           'age': age,
           'gender': gender,
-          '_token': $('input[name=_token]').val()
+          'phone_number': phone_number,
+          'address': address
         },
         beforeSend: function beforeSend() {
           Swal.fire({
@@ -224,11 +266,13 @@ $(document).ready(function () {
           });
         },
         success: function success(data) {
-          Swal.disableLoading(); // console.log(data);
+          Swal.disableLoading();
 
           if (data.errors) {
+            Swal.close();
             forEachError(data);
           } else if (data.message) {
+            Swal.close();
             displayErrorMessage(data.message);
           } else {
             $(".lecturerModal").hide();
@@ -288,6 +332,8 @@ $(document).on('click', '.lecturerEdit', function (e) {
         $("input[name=first_name]").val(v.first_name);
         $("input[name=last_name]").val(v.last_name);
         $("input[name=age]").val(v.age);
+        $("input[name=address]").val(v.address);
+        $("input[name=phone_number]").val(v.phone_number);
         Swal.close();
         $('.lecturerModal').modal('show');
         clearInterval(timerInterval);

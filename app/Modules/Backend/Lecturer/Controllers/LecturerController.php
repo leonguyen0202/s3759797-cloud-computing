@@ -1,9 +1,9 @@
 <?php
 namespace App\Modules\Backend\Lecturer\Controllers;
 
-use App\Modules\Backend\Lecturer\Models\Lecturer;
 use App\Exports\LecturerExport;
 use App\Http\Controllers\Controller;
+use App\Modules\Backend\Lecturer\Models\Lecturer;
 use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Http\Request;
@@ -18,7 +18,8 @@ class LecturerController extends Controller
         // $this->middleware(['auth', 'permission:view-lecturer|create-lecturer|update-lecturer|delete-lecturer']);
     }
 
-    function list() {
+    public function dataTables()
+    {
         $lecturer = Lecturer::query()->exclude(['created_at'])->get();
 
         return DataTables::of($lecturer)
@@ -70,8 +71,10 @@ class LecturerController extends Controller
         $validator = \Validator::make($request->all(), [
             'first_name' => 'required|min:3|string',
             'last_name' => 'required|min:3|string',
+            'address' => 'required|min:3|string',
             'age' => 'required|numeric|between:20,100',
             'gender' => 'required',
+            'phone_number' => 'required|string',
         ]);
 
         // Validate the input and return correct response
@@ -85,6 +88,8 @@ class LecturerController extends Controller
                 'last_name' => $request->input('last_name'),
                 'age' => $request->input('age'),
                 'gender' => $request->input('gender'),
+                'phone_number' => $request->input('phone_number'),
+                'address' => $request->input('address')
             ]);
             return response()->json(['success' => 'Success']);
         } else {
@@ -142,7 +147,8 @@ class LecturerController extends Controller
 
     public function export()
     {
-        Excel::store(new LecturerExport(), 'lecturers.csv', 'gcs');
+        Excel::store(new LecturerExport(), 'Employees.csv', 'public');
+
         return new LecturerExport();
     }
 

@@ -16,7 +16,7 @@ class Lecturer extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['first_name', 'last_name', 'age', 'gender'];
+    protected $fillable = ['first_name', 'last_name', 'age', 'gender', 'phone_number', 'address'];
 
     protected static function boot()
     {

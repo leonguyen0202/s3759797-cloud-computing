@@ -33,10 +33,10 @@ Route::group(
             'uses' => 'LecturerController@delete',
         ]);
 
-        Route::get('lecturer/list', [
+        Route::get('lecturer/dataTables', [
             // 'middleware' => ['permission:view-lecturer'],
-            'as' => 'lecturer.list',
-            'uses' => 'LecturerController@list',
+            'as' => 'lecturer.dataTables',
+            'uses' => 'LecturerController@dataTables',
         ]);
 
         Route::get('lecturer/export', [

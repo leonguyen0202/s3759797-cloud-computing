@@ -12,23 +12,19 @@
         <div class="card">
             <div class="card-header card-header-primary card-header-icon">
                 <h2 class="card-title">
-                    <i class="metismenu-icon pe-7s-news-paper"></i>&nbsp;Lecturer List
+                    <i class="metismenu-icon pe-7s-news-paper"></i>&nbsp;Employees List
                 </h2>
             </div>
             <div class="card-body">
-                {{-- @can('create-lecturer') --}}
                 <div class="toolbar">
                     <!--        Here you can write extra buttons/actions for the toolbar              -->
                     <button type="button" id="lecturerTableBtnAdd" class="btn btn-primary lecturerTableBtnAdd"
                         data-toggle="modal" data-target=".lecturerModal">
                         <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Add new
                     </button>
-                    {{-- <a href="{{route('lecturer.export')}}" class="btn btn-success pull-left">
-                    <i class="fas fa-file-download"></i>&nbsp;&nbsp;Download as CSV
-                    </a> --}}
+                    <a href="{{route('lecturer.export')}}" class="btn btn-success ml-2"><i class="fas fa-download"></i>&nbsp;Export as CSV</a>
                 </div>
                 <br>
-                {{-- @endcan --}}
                 <div class="material-datatables">
                     <table id="lecturers" class="table table-striped table-no-bordered table-hover" cellspacing="0"
                         width="100%" style="width:100%">
@@ -70,12 +66,13 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="lecturerModalLabel">Add new lecturer</h5>
+                    <h5 class="modal-title" id="lecturerModalLabel">Add new employee</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="col-md-6 ml-auto mr-auto customAlert justify-content-center" style="display:none;"></div>
                     <input type="hidden" name="action" id="action">
                     <input type="hidden" name="id" id="id">
                     <div class="row pt-3 mb-3">

@@ -2,7 +2,9 @@
 namespace App\Modules\Backend\Dashboard\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Backend\Lecturer\Models\Lecturer;
 use Google\Cloud\BigQuery\BigQueryClient;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -15,11 +17,19 @@ class DashboardController extends Controller
 
     public function index()
     {
-        dd($this->topFrequency());
+        $group = Lecturer::query()
+            ->select('gender', DB::raw('count(*) as total'))
+            ->groupBy('gender')
+            ->get();
+        
+        $avg = Lecturer::query()->avg('age');
 
         return view('Dashboard::index')->with([
+            'totalBabyName' => $this->totalBabyName(),
             'leastFrequency' => $this->leastFrequency(),
-            'topFrequency' => $this->topFrequency()
+            'topFrequency' => $this->topFrequency(),
+            'lecturerGroup' => $group,
+            'averageAge' => $avg,
         ]);
     }
 
@@ -84,7 +94,7 @@ class DashboardController extends Controller
         ]);
 
         $jobConfig = $bigQuery->query($query);
-        
+
         $job = $bigQuery->startQuery($jobConfig);
 
         $queryResults = $job->queryResults();
@@ -98,5 +108,37 @@ class DashboardController extends Controller
         }
 
         return $result;
+    }
+
+    protected function totalBabyName()
+    {
+        /** Uncomment and populate these variables in your code */
+        $query = "SELECT count(`name`) as `count` FROM `" . $this->project_id . "." . ($this->big_query_config)['data_set'] . "." . ($this->big_query_config)['table_name'] . "`";
+
+        $bigQuery = new BigQueryClient([
+            'projectId' => $this->project_id,
+            'keyFile' => [
+                'type' => ($this->big_query_config)['type'],
+                'private_key_id' => ($this->big_query_config)['private_key_id'],
+                'private_key' => ($this->big_query_config)['private_key'],
+                'client_email' => ($this->big_query_config)['client_email'],
+                'client_id' => ($this->big_query_config)['client_id'],
+                'auth_uri' => ($this->big_query_config)['auth_uri'],
+                'token_uri' => ($this->big_query_config)['token_uri'],
+                'auth_provider_x509_cert_url' => ($this->big_query_config)['auth_provider_x509_cert_url'],
+                'client_x509_cert_url' => ($this->big_query_config)['client_x509_cert_url'],
+            ],
+        ]);
+
+        $jobConfig = $bigQuery->query($query);
+
+        $job = $bigQuery->startQuery($jobConfig);
+
+        $queryResults = $job->queryResults();
+
+        foreach ($queryResults as $row) {
+            $this->big_query_count = $row['count'];
+        }
+        return $this->big_query_count;
     }
 }

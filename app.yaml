@@ -1,0 +1,23 @@
+runtime: php73
+
+env_variables:
+  ## Put production environment variables here.
+  APP_KEY:  #Copy app key fron .env
+  APP_STORAGE: /tmp
+  VIEW_COMPILED_PATH: /tmp
+  SESSION_DRIVER: cookie
+  DB_HOST: 
+  DB_DATABASE: 
+  DB_USERNAME: root # tried custom user aswell
+  DB_PASSWORD: 
+  DB_SOCKET: 
+
+beta_settings:
+  cloud_sql_instances:
+runtime_config:
+ document_root: public #folder where index.php is
+handlers:
+- url: /js
+  static_dir: public/js
+- url: /css
+  static_dir: public/css
