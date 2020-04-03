@@ -38,5 +38,11 @@ Route::group(
             'as' => 'lecturer.list',
             'uses' => 'LecturerController@list',
         ]);
+
+        Route::get('lecturer/export', [
+            // 'middleware' => ['permission:edit-any'],
+            'as' => 'lecturer.export',
+            'uses' => 'LecturerController@export',
+        ]);
     }
 );

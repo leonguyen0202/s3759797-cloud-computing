@@ -2,7 +2,7 @@
 namespace App\Modules\Backend\Lecturer\Controllers;
 
 use App\Modules\Backend\Lecturer\Models\Lecturer;
-// use App\Exports\LecturerExport;
+use App\Exports\LecturerExport;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Faker\Factory;
