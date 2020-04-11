@@ -75,7 +75,6 @@ class EmployeeController extends Controller
 
     public function filter(Request $request)
     {
-
         if ($request->gender) {
             $this->gender = [$request->gender];
         }

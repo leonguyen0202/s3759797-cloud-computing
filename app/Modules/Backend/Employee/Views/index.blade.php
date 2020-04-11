@@ -71,6 +71,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($results as $item)
+                                        <tr>
                                             <td>
                                                 {{$item->first_name}}
                                             </td>
@@ -79,14 +80,14 @@
                                             </td>
                                             <td>
                                                 @switch($item->gender)
-                                                    @case("F")
+                                                    @case("M")
                                                         <span class="badge badge-pills badge-success">Male</span>
                                                         @break
-                                                    @case("M")
-                                                    <span class="badge badge-pills badge-info">Female</span>
+                                                    @case("F")
+                                                        <span class="badge badge-pills badge-info">Female</span>
                                                         @break
                                                     @default
-                                                        
+
                                                 @endswitch
                                             </td>
                                             <td>
@@ -98,6 +99,7 @@
                                             <td>
                                                 {{$item->phone_number}}
                                             </td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
