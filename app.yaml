@@ -2,18 +2,18 @@ runtime: php73
 
 env_variables:
   ## Put production environment variables here.
-  APP_KEY:  #Copy app key fron .env
+  APP_KEY: base64:sq9/OYHz3zq0kmDF3Z/d0yUNBAXOPDXxHOMUlPU7WFY=  #Copy app key fron .env
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
   SESSION_DRIVER: cookie
-  DB_HOST: 
-  DB_DATABASE: 
+  DB_HOST: 35.184.187.222
+  DB_DATABASE: s3759797_management
   DB_USERNAME: root # tried custom user aswell
-  DB_PASSWORD: 
-  DB_SOCKET: 
+  DB_PASSWORD: s3759797
+  DB_SOCKET: "/cloudsql/s3759797-employee-management:us-central1:s3759797-management"
 
 beta_settings:
-  cloud_sql_instances:
+  cloud_sql_instances: s3759797-employee-management:us-central1:s3759797-management
 runtime_config:
  document_root: public #folder where index.php is
 handlers:
@@ -21,3 +21,7 @@ handlers:
   static_dir: public/js
 - url: /css
   static_dir: public/css
+- url: /fonts
+  static_dir: public/fonts
+- url: /images
+  static_dir: public/images

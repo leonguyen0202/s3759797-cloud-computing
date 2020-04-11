@@ -22,7 +22,8 @@
                         data-toggle="modal" data-target=".lecturerModal">
                         <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;Add new
                     </button>
-                    <a href="{{route('lecturer.export')}}" class="btn btn-success ml-2"><i class="fas fa-download"></i>&nbsp;Export as CSV</a>
+                    <a href="{{route('employee.export')}}" class="btn btn-success ml-2"><i
+                            class="fas fa-download"></i>&nbsp;Export as CSV</a>
                 </div>
                 <br>
                 <div class="material-datatables">
@@ -61,37 +62,35 @@
 
 @section('modal')
 <div class="modal fade lecturerModal" tabindex="-1" role="dialog" aria-labelledby="lecturerModal" aria-hidden="true">
-    {{-- <form action="{{route('lecturer.store')}}" method="post"> --}}
-        @csrf
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="lecturerModalLabel">Add new employee</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-6 ml-auto mr-auto customAlert justify-content-center" style="display:none;"></div>
-                    <input type="hidden" name="action" id="action">
-                    <input type="hidden" name="id" id="id">
-                    <div class="row pt-3 mb-3">
-                        <div class="col-lg-6 col-sm-6 mb-30 pb-5">
-                            @include('Lecturer::modal.basic_info')
-                        </div>
-                        <div class="col-lg-6 col-sm-6 mb-30 pb-5">
-                            @include('Lecturer::modal.other_info')
-                        </div>
+    @csrf
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="lecturerModalLabel">Add new employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-6 ml-auto mr-auto customAlert justify-content-center" style="display:none;"></div>
+                <input type="hidden" name="action" id="action">
+                <input type="hidden" name="id" id="id">
+                <div class="row pt-3 mb-3">
+                    <div class="col-lg-6 col-sm-6 mb-30 pb-5">
+                        @include('Lecturer::modal.basic_info')
+                    </div>
+                    <div class="col-lg-6 col-sm-6 mb-30 pb-5">
+                        @include('Lecturer::modal.other_info')
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id="btnModalCancel" class="btn btn-secondary btnModalCancel"
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnModalCancel" class="btn btn-secondary btnModalCancel"
                     data-dismiss="modal">Close</button>
                 <button type="button" id="lecturerModalButton" class="btn btn-primary lecturerModalButton">Save
                     changes</button>
-                </div>
             </div>
         </div>
-    {{-- </form> --}}
+    </div>
 </div>
 @endsection

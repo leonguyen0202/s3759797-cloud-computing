@@ -3,45 +3,45 @@ $namespace = 'App\Modules\Backend\Lecturer\Controllers';
 Route::group(
     ['module' => 'Backend', 'prefix' => 'dashboard', 'namespace' => $namespace, 'middleware' => ['web']],
     function () {
-        Route::get('lecturer', [
+        Route::get('employee', [
             // 'middleware' => ['permission:access-dashboard'],
-            'as' => 'lecturer.index',
+            'as' => 'employee.index',
             'uses' => 'LecturerController@index',
         ]);
 
-        Route::post('lecturer', [
+        Route::post('employee', [
             // 'middleware' => ['permission:create-lecturer'],
-            'as' => 'lecturer.store',
+            'as' => 'employee.store',
             'uses' => 'LecturerController@store',
         ]);
 
-        Route::get('lecturer/edit', [
+        Route::get('employee/edit', [
             // 'middleware' => ['permission:update-lecturer'],
-            'as' => 'lecturer.edit',
+            'as' => 'employee.edit',
             'uses' => 'LecturerController@edit',
         ]);
 
-        Route::put('lecturer/update', [
+        Route::put('employee/update', [
             // 'middleware' => ['permission:update-lecturer'],
-            'as' => 'lecturer.update',
+            'as' => 'employee.update',
             'uses' => 'LecturerController@update',
         ]);
 
-        Route::delete('lecturer/destroy', [
+        Route::delete('employee/destroy', [
             // 'middleware' => ['permission:delete-lecturer'],
-            'as' => 'lecturer.destroy',
+            'as' => 'employee.destroy',
             'uses' => 'LecturerController@delete',
         ]);
 
-        Route::get('lecturer/dataTables', [
+        Route::get('employee/dataTables', [
             // 'middleware' => ['permission:view-lecturer'],
-            'as' => 'lecturer.dataTables',
+            'as' => 'employee.dataTables',
             'uses' => 'LecturerController@dataTables',
         ]);
 
-        Route::get('lecturer/export', [
+        Route::get('employee/export', [
             // 'middleware' => ['permission:edit-any'],
-            'as' => 'lecturer.export',
+            'as' => 'employee.export',
             'uses' => 'LecturerController@export',
         ]);
     }

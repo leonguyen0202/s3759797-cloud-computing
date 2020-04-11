@@ -42,7 +42,7 @@
                 </li>
                 <li class="app-sidebar__heading">Assignment 1</li>
                 <li>
-                    <a href="{{route('lecturer.index')}}" {!! set_full_request_class(['dashboard/lecturer'], "class='mm-active'" ) !!}>
+                    <a href="{{route('employee.index')}}" {!! set_full_request_class(['dashboard/employee'], "class='mm-active'" ) !!}>
                         <i class="metismenu-icon pe-7s-display2"></i>
                         Employees
                     </a>

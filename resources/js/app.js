@@ -49,7 +49,7 @@ $(document).ready(function () {
     $('#lecturers').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '/dashboard/lecturer/dataTables',
+        ajax: '/dashboard/employee/dataTables',
         "pagingType": "full_numbers",
         "lengthMenu": [
             [10, 25, 50, -1],
@@ -104,7 +104,7 @@ $(document).ready(function () {
             var address = document.getElementById('address').value;
 
             $.ajax({
-                url: '/dashboard/lecturer',
+                url: '/dashboard/employee',
                 method: "POST",
                 data: {
                     'first_name': first_name,
@@ -172,7 +172,7 @@ $(document).ready(function () {
             var address = document.getElementById('address').value;
 
             $.ajax({
-                url: '/dashboard/lecturer/update',
+                url: '/dashboard/employee/update',
                 method: "PUT",
                 data: {
                     'id': id,
@@ -240,7 +240,7 @@ $(document).on('click', '.lecturerEdit', function(e) {
     let timerInterval;
 
     $.ajax({
-        url: '/dashboard/lecturer/edit',
+        url: '/dashboard/employee/edit',
         method: "GET",
         dataType: 'JSON',
         data: {
@@ -305,7 +305,7 @@ $(document).on('click', '.lecturerRemove', function (e) {
             // console.log(id);
 
             $.ajax({
-                url: '/dashboard/lecturer/destroy',
+                url: '/dashboard/employee/destroy',
                 method: "DELETE",
                 data: {
                     'id': id,
