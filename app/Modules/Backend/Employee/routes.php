@@ -15,6 +15,12 @@ Route::group(
             'uses' => 'EmployeeController@index',
         ]);
 
+        Route::post('employee/filter', [
+            // 'middleware' => ['permission:create-lecturer'],
+            'as' => 'employee.filter',
+            'uses' => 'EmployeeController@filter',
+        ]);
+
         Route::post('employee', [
             // 'middleware' => ['permission:create-lecturer'],
             'as' => 'employee.store',

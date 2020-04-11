@@ -61,19 +61,23 @@ $(document).ready(function () {
             },
             {
                 data: 'last_name',
-                name: 'last_name'
+                name: 'last_name',
+                searchable: false
             },
             {
                 data: 'gender',
-                name: 'gender'
+                name: 'gender',
+                searchable: false
             },
             {
                 data: 'age',
-                name: 'age'
+                name: 'age',
+                searchable: false
             },
             {
                 data: 'address',
-                name: 'address'
+                name: 'address',
+                searchable: false
             },
             {
                 data: 'action',

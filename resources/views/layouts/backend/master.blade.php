@@ -47,30 +47,13 @@
                             <div class="app-footer-left">
                                 <ul class="nav">
                                     <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 1
+                                        <a href="{{route('bigquery.index')}}" class="nav-link">
+                                            Big Query
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 2
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="app-footer-right">
-                                <ul class="nav">
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            Footer Link 3
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            <div class="badge badge-success mr-1 ml-0">
-                                                <small>NEW</small>
-                                            </div>
-                                            Footer Link 4
+                                        <a href="{{route('employee.index')}}" class="nav-link">
+                                            Employee
                                         </a>
                                     </li>
                                 </ul>

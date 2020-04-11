@@ -5,7 +5,6 @@ use App\Exports\EmployeeExport;
 use App\Http\Controllers\Controller;
 use App\Modules\Backend\Employee\Models\Employee;
 use Carbon\Carbon;
-use Faker\Factory;
 use Google\Cloud\BigQuery\BigQueryClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -19,6 +18,9 @@ class EmployeeController extends Controller
         // $this->middleware(['auth', 'permission:view-lecturer|create-lecturer|update-lecturer|delete-lecturer']);
         $this->project_id = config('assignment.project_id');
         $this->big_query_config = config('assignment.big_query');
+
+        $this->range = [1, 100];
+        $this->gender = ["F", "M"];
     }
 
     public function dataTables()
@@ -66,7 +68,30 @@ class EmployeeController extends Controller
 
     public function index()
     {
-        return view('Employee::index');
+        return view('Employee::index')->with([
+            'results' => null,
+        ]);
+    }
+
+    public function filter(Request $request)
+    {
+
+        if ($request->gender) {
+            $this->gender = [$request->gender];
+        }
+
+        if ($request->age) {
+            $this->range = explode("_", $request->age);
+        }
+
+        $results = Employee::query()
+            ->whereIn('gender', $this->gender)
+            ->whereBetween('age', $this->range)
+            ->get();
+
+        return view('Employee::index')->with([
+            'results' => $results,
+        ]);
     }
 
     public function store(Request $request)
@@ -140,6 +165,9 @@ class EmployeeController extends Controller
             $employee->age = $request->input('age');
             $employee->gender = $request->input('gender');
 
+            $employee->phone_number = $request->input('phone_number');
+            $employee->address = $request->input('address');
+
             $employee->save();
 
             return response()->json(['success' => 'Success']);
@@ -153,24 +181,6 @@ class EmployeeController extends Controller
         Excel::store(new EmployeeExport(), 'Employees.csv', 'public');
 
         return new EmployeeExport();
-    }
-
-    public function seedingLecturer(Request $request)
-    {
-        $faker = Factory::create();
-
-        foreach (range(1, $request->input('data')) as $i) {
-            Employee::create([
-                'first_name' => $faker->firstName,
-                'last_name' => $faker->lastName,
-                'gender' => $faker->randomElement(['M', 'F']),
-                'age' => $faker->numberBetween($min = 25, $max = 50),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
-
-        return response()->json(['success' => 'Success']);
     }
 
     public function delete(Request $request)
