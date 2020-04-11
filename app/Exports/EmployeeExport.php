@@ -69,7 +69,7 @@ class EmployeeExport extends DefaultValueBinder implements WithCustomValueBinder
      */
     // public function query()
     // {
-    //     return Lecturer::query()->exclude(['id', 'created_at']);
+    //     return Employee::query()->exclude(['id', 'created_at']);
     // }
 
     /**
@@ -77,22 +77,22 @@ class EmployeeExport extends DefaultValueBinder implements WithCustomValueBinder
      */
     public function collection()
     {
-        return Lecturer::exclude(['id', 'created_at'])->get();
+        return Employee::exclude(['id', 'created_at'])->get();
     }
 
     /**
-     * @var Lecturer $lecturer
+     * @var Employee $employee
      * @return array
      */
-    public function map($lecturer): array
+    public function map($employee): array
     {
         return [
-            $lecturer->first_name,
-            $lecturer->last_name,
-            $lecturer->gender,
-            $lecturer->age,
-            $lecturer->address,
-            $lecturer->phone_number,
+            $employee->first_name,
+            $employee->last_name,
+            $employee->gender,
+            $employee->age,
+            $employee->address,
+            $employee->phone_number,
         ];
     }
 }

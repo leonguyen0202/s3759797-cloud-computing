@@ -2,7 +2,7 @@
 namespace App\Modules\Backend\Dashboard\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Backend\Lecturer\Models\Lecturer;
+use App\Modules\Backend\Employee\Models\Employee;
 use Google\Cloud\BigQuery\BigQueryClient;
 use Illuminate\Support\Facades\DB;
 
@@ -17,12 +17,12 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $group = Lecturer::query()
+        $group = Employee::query()
             ->select('gender', DB::raw('count(*) as total'))
             ->groupBy('gender')
             ->get();
         
-        $avg = Lecturer::query()->avg('age');
+        $avg = Employee::query()->avg('age');
 
         return view('Dashboard::index')->with([
             'totalBabyName' => $this->totalBabyName(),

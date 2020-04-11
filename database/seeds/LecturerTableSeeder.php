@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory;
-use App\Modules\Backend\Lecturer\Models\Lecturer;
+use App\Modules\Backend\Employee\Models\Employee;
 
-class LecturerTableSeeder extends Seeder
+class EmployeeTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +15,10 @@ class LecturerTableSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        Lecturer::truncate();
+        Employee::truncate();
 
         foreach (range(1, 1000) as $i) {
-            Lecturer::create([
+            Employee::create([
                 // 'id' => \Webpatser\Uuid\Uuid::generate(4),
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,

@@ -183,7 +183,7 @@ $(document).ready(function () {
                         Swal.close();
                         displayErrorMessage(data.message);
                     } else {
-                        $(".lecturerModal").hide();
+                        $(".employeeModal").hide();
                         Swal.close();
                         clearInterval(timerInterval);
 
@@ -251,7 +251,7 @@ $(document).ready(function () {
                         Swal.close();
                         displayErrorMessage(data.message);
                     } else {
-                        $(".lecturerModal").hide();
+                        $(".employeeModal").hide();
                         Swal.close();
                         clearInterval(timerInterval);
 
@@ -320,7 +320,7 @@ $(document).on('click', '.employeeEdit', function(e) {
                 $("input[name=phone_number]").val(v.phone_number);
 
                 Swal.close();
-                $('.lecturerModal').modal('show');
+                $('.employeeModal').modal('show');
                 clearInterval(timerInterval);
             })
         },

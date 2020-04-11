@@ -104,13 +104,13 @@ class EmployeeController extends Controller
     {
         $id = $request->input('id');
 
-        $lecturer = Employee::find($request->input('id'));
+        $employee = Employee::find($request->input('id'));
 
-        if ($lecturer == null) {
-            return response()->json(['message' => 'No lecturer found!']);
+        if ($employee == null) {
+            return response()->json(['message' => 'No employee found!']);
         }
 
-        return response()->json(['data' => $lecturer]);
+        return response()->json(['data' => $employee]);
     }
 
     public function update(Request $request)
@@ -127,20 +127,20 @@ class EmployeeController extends Controller
             return response()->json(['errors' => $validator->errors()->all()]);
         }
 
-        $lecturer = Lecturer::find($request->input('id'));
+        $employee = Employee::find($request->input('id'));
 
-        if ($lecturer == null) {
+        if ($employee == null) {
             return response()->json(['message' => 'Data not found!']);
         }
 
         if ($request->input('gender') == 'M' || $request->input('gender') == 'F') {
 
-            $lecturer->first_name = $request->input('first_name');
-            $lecturer->last_name = $request->input('last_name');
-            $lecturer->age = $request->input('age');
-            $lecturer->gender = $request->input('gender');
+            $employee->first_name = $request->input('first_name');
+            $employee->last_name = $request->input('last_name');
+            $employee->age = $request->input('age');
+            $employee->gender = $request->input('gender');
 
-            $lecturer->save();
+            $employee->save();
 
             return response()->json(['success' => 'Success']);
         } else {
@@ -175,13 +175,13 @@ class EmployeeController extends Controller
 
     public function delete(Request $request)
     {
-        $lecturer = Employee::find($request->input('id'));
+        $employee = Employee::find($request->input('id'));
 
-        if ($lecturer == null) {
+        if ($employee == null) {
             return response()->json(['message' => 'Data not found!']);
         }
 
-        $lecturer->delete();
+        $employee->delete();
 
         return response()->json(['success' => 'Success']);
     }
