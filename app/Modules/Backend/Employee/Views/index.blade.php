@@ -40,8 +40,7 @@
                                 <select type="select" id="ageSelect" name="age" class="custom-select">
                                     <option selected disabled>Select range of age</option>
                                     <option value="1_100">All</option>
-                                    <option value="1_20">From 1 to 20</option>
-                                    <option value="21_40">From 21 to 40</option>
+                                    <option value="20_40">From 20 to 40</option>
                                     <option value="41_60">From 41 to 60</option>
                                     <option value="61_80">From 61 to 80</option>
                                     <option value="81_100">From 81 to 100</option>
