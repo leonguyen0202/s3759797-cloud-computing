@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\Backend\Lecturer\Models\Lecturer;
 use Carbon\Carbon;
 use Faker\Factory;
+use Google\Cloud\BigQuery\BigQueryClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,6 +17,8 @@ class LecturerController extends Controller
     public function __construct()
     {
         // $this->middleware(['auth', 'permission:view-lecturer|create-lecturer|update-lecturer|delete-lecturer']);
+        $this->project_id = config('assignment.project_id');
+        $this->big_query_config = config('assignment.big_query');
     }
 
     public function dataTables()
@@ -89,7 +92,7 @@ class LecturerController extends Controller
                 'age' => $request->input('age'),
                 'gender' => $request->input('gender'),
                 'phone_number' => $request->input('phone_number'),
-                'address' => $request->input('address')
+                'address' => $request->input('address'),
             ]);
             return response()->json(['success' => 'Success']);
         } else {
@@ -181,5 +184,97 @@ class LecturerController extends Controller
         $lecturer->delete();
 
         return response()->json(['success' => 'Success']);
+    }
+
+    /**
+     * Employee frequency compare to Big Query Baby Name
+     */
+    public function frequency_index()
+    {
+        # code...
+        return view('Lecturer::frequency');
+    }
+
+    public function frequency_dataTables()
+    {
+        $employees = Lecturer::query()->exclude(['created_at'])->get();
+
+        return DataTables::of($employees)
+            ->addColumn('first_name', function ($employees) {
+                return $employees->first_name;
+            })
+            ->addColumn('first_name_frequency', function ($employees) {
+                $frequency = $this->big_query_result($employees->first_name);
+
+                return '<span class="badge badge-danger">' . $frequency[0]['count'] . '</span>';
+            })
+            ->addColumn('last_name', function ($employees) {
+                return $employees->last_name;
+            })
+            ->addColumn('last_name_frequency', function ($employees) {
+                $frequency = $this->big_query_result($employees->last_name);
+
+                return '<span class="badge badge-danger">' . $frequency[0]['count'] . '</span>';
+            })
+            ->addColumn('gender', function ($employees) {
+                switch ($employees->gender) {
+                    case 'M':
+                        return '<span class="badge badge-success">Male</span>';
+                        break;
+                    case 'F':
+                        return '<span class="badge badge-info">Female</span>';
+                        break;
+
+                    default:
+                        return '<span class="badge badge-danger">Wrong type!</span>';
+                        break;
+                }
+            })
+            ->addColumn('age', function ($employees) {
+                return $employees->age;
+            })
+            ->editColumn('updated_at', function ($groups) {
+                return Carbon::parse($groups->updated_at)->diffForHumans();
+            })
+            ->rawColumns(['first_name_frequency', 'last_name_frequency', 'gender'])
+            ->make(true);
+    }
+
+    public function big_query_result($name)
+    {
+        $query = "SELECT COUNT(*) as count FROM `" . $this->project_id . "." . ($this->big_query_config)['data_set'] . "." . ($this->big_query_config)['table_name'] . "` WHERE name = '" . $name . "'";
+
+        $bigQuery = new BigQueryClient([
+            'projectId' => $this->project_id,
+            'keyFile' => [
+                'type' => ($this->big_query_config)['type'],
+                'private_key_id' => ($this->big_query_config)['private_key_id'],
+                'private_key' => ($this->big_query_config)['private_key'],
+                'client_email' => ($this->big_query_config)['client_email'],
+                'client_id' => ($this->big_query_config)['client_id'],
+                'auth_uri' => ($this->big_query_config)['auth_uri'],
+                'token_uri' => ($this->big_query_config)['token_uri'],
+                'auth_provider_x509_cert_url' => ($this->big_query_config)['auth_provider_x509_cert_url'],
+                'client_x509_cert_url' => ($this->big_query_config)['client_x509_cert_url'],
+            ],
+        ]);
+
+        $jobConfig = $bigQuery->query($query);
+
+        $job = $bigQuery->startQuery($jobConfig);
+
+        $queryResults = $job->queryResults();
+
+        $result = collect();
+
+        foreach ($queryResults as $row) {
+            $result->push(
+                [
+                    'count' => $row['count'],
+                ]
+            );
+        }
+
+        return $result;
     }
 }

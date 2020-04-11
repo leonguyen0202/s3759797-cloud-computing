@@ -1,11 +1,5 @@
 @extends('layouts.backend.master')
 
-{{-- @section('title','Groups Management') --}}
-
-{{-- @push('customCSS')
-<link rel="stylesheet" href="{{asset('admin/css/setting.css')}}">
-@endpush --}}
-
 @section('content')
 <div class="row">
     <div class="col-md-12">

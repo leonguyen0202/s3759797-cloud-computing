@@ -33,25 +33,34 @@
     <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
-                <li class="app-sidebar__heading">Dashboards</li>
-                <li>
-                    <a href="{{route('dashboard.index')}}" {!! set_full_request_class(['dashboard'], "class='mm-active'" ) !!}>
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Dashboard
-                    </a>
-                </li>
                 <li class="app-sidebar__heading">Assignment 1</li>
                 <li>
-                    <a href="{{route('employee.index')}}" {!! set_full_request_class(['dashboard/employee'], "class='mm-active'" ) !!}>
-                        <i class="metismenu-icon pe-7s-display2"></i>
-                        Employees
-                    </a>
-                </li>
-                <li>
-                    <a href="{{route('bigquery.index')}}" {!! set_full_request_class(['dashboard/big-query'], "class='mm-active'" ) !!}>
+                    <a href="{{route('bigquery.index')}}" {!!
+                        set_full_request_class(['dashboard/big-query'], "class='mm-active'" ) !!}>
                         <i class="metismenu-icon pe-7s-server"></i>
                         Big Query
                     </a>
+                </li>
+                <li {!! set_full_request_class(['dashboard/employee', 'dashboard/employee/frequency'], "class='mm-active'" ) !!}>
+                    <a href="#">
+                        <i class="metismenu-icon pe-7s-diamond"></i>
+                        Employees
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    </a>
+                    <ul {!! set_full_request_class(['dashboard/employee', 'dashboard/employee/frequency'], "class='mm-show'" ) !!}>
+                        <li>
+                            <a href="{{route('employee.index')}}" {!! set_full_request_class(['dashboard/employee'], "class='mm-active'" ) !!}>
+                                <i class="metismenu-icon"></i>
+                                List
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('employee.frequency')}}" {!! set_full_request_class(['dashboard/employee/frequency'], "class='mm-active'" ) !!}>
+                                <i class="metismenu-icon"></i>
+                                Frequency
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

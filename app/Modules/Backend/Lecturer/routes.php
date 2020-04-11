@@ -3,6 +3,12 @@ $namespace = 'App\Modules\Backend\Lecturer\Controllers';
 Route::group(
     ['module' => 'Backend', 'prefix' => 'dashboard', 'namespace' => $namespace, 'middleware' => ['web']],
     function () {
+        Route::get('employee/frequency', [
+            // 'middleware' => ['permission:access-dashboard'],
+            'as' => 'employee.frequency',
+            'uses' => 'LecturerController@frequency_index',
+        ]);
+
         Route::get('employee', [
             // 'middleware' => ['permission:access-dashboard'],
             'as' => 'employee.index',
@@ -37,6 +43,12 @@ Route::group(
             // 'middleware' => ['permission:view-lecturer'],
             'as' => 'employee.dataTables',
             'uses' => 'LecturerController@dataTables',
+        ]);
+
+        Route::get('employee/frequency/dataTables', [
+            // 'middleware' => ['permission:view-lecturer'],
+            'as' => 'employee.frequency.dataTables',
+            'uses' => 'LecturerController@frequency_dataTables',
         ]);
 
         Route::get('employee/export', [

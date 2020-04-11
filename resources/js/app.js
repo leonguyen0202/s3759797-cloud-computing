@@ -89,6 +89,51 @@ $(document).ready(function () {
         }
     });
 
+    $('#employees-frequency').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '/dashboard/employee/frequency/dataTables',
+        "pagingType": "full_numbers",
+        "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+        ],
+        columns: [{
+                data: 'first_name',
+                name: 'first_name'
+            },
+            {
+                data: 'first_name_frequency',
+                name: 'first_name_frequency'
+            },
+            {
+                data: 'last_name',
+                name: 'last_name'
+            },
+            {
+                data: 'last_name_frequency',
+                name: 'last_name_frequency'
+            },
+            {
+                data: 'gender',
+                name: 'gender'
+            },
+            {
+                data: 'age',
+                name: 'age'
+            },
+            {
+                data: 'updated_at',
+                name: 'updated_at'
+            }
+        ],
+        responsive: true,
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search records"
+        }
+    });
+
     changeTitleAndAction('lecturerTableBtnAdd', 'lecturerModalLabel', 'Add new lecturer', 'lecturerModalButton', 'Add new', 'Add');
 
     $('#lecturerModalButton').click(function (e) {
