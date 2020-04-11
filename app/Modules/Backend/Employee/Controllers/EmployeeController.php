@@ -1,9 +1,9 @@
 <?php
-namespace App\Modules\Backend\Lecturer\Controllers;
+namespace App\Modules\Backend\Employee\Controllers;
 
-use App\Exports\LecturerExport;
+use App\Exports\EmployeeExport;
 use App\Http\Controllers\Controller;
-use App\Modules\Backend\Lecturer\Models\Lecturer;
+use App\Modules\Backend\Employee\Models\Employee;
 use Carbon\Carbon;
 use Faker\Factory;
 use Google\Cloud\BigQuery\BigQueryClient;
@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
-class LecturerController extends Controller
+class EmployeeController extends Controller
 {
     public function __construct()
     {
@@ -23,17 +23,17 @@ class LecturerController extends Controller
 
     public function dataTables()
     {
-        $lecturer = Lecturer::query()->exclude(['created_at'])->get();
+        $employees = Employee::query()->exclude(['created_at'])->get();
 
-        return DataTables::of($lecturer)
-            ->addColumn('first_name', function ($lecturer) {
-                return $lecturer->first_name;
+        return DataTables::of($employees)
+            ->addColumn('first_name', function ($employee) {
+                return $employee->first_name;
             })
-            ->addColumn('last_name', function ($lecturer) {
-                return $lecturer->last_name;
+            ->addColumn('last_name', function ($employee) {
+                return $employee->last_name;
             })
-            ->addColumn('gender', function ($lecturer) {
-                switch ($lecturer->gender) {
+            ->addColumn('gender', function ($employee) {
+                switch ($employee->gender) {
                     case 'M':
                         return '<span class="badge badge-success">Male</span>';
                         break;
@@ -46,19 +46,19 @@ class LecturerController extends Controller
                         break;
                 }
             })
-            ->addColumn('age', function ($lecturer) {
-                return $lecturer->age;
+            ->addColumn('age', function ($employee) {
+                return $employee->age;
             })
-            ->addColumn('action', function ($lecturer) {
+            ->addColumn('action', function ($employee) {
                 $random = Str::random(60);
-                return '<div class="lecturerParent">
-                            <input class="id" id="' . $random . '" name="lecturer" value="' . $lecturer->id . '" type="hidden" style="display:none;" readonly>
-                            <a href="?queue=' . $random . '" class="btn btn-warning lecturerEdit"><i class="fas fa-edit"></i></a>
-                            <a href="?queue=' . $random . '" class="btn btn-danger  lecturerRemove"><i class="fas fa-trash"></i></a>
+                return '<div class="employeeParent">
+                            <input class="id" id="' . $random . '" name="employee" value="' . $employee->id . '" type="hidden" style="display:none;" readonly>
+                            <a href="?queue=' . $random . '" class="btn btn-warning employeeEdit"><i class="fas fa-edit"></i></a>
+                            <a href="?queue=' . $random . '" class="btn btn-danger  employeeRemove"><i class="fas fa-trash"></i></a>
                         </div>';
             })
-            ->editColumn('updated_at', function ($groups) {
-                return Carbon::parse($groups->updated_at)->diffForHumans();
+            ->editColumn('address', function ($employee) {
+                return split_sentence($employee->address, 20, '...');
             })
             ->rawColumns(['gender', 'action'])
             ->make(true);
@@ -66,7 +66,7 @@ class LecturerController extends Controller
 
     public function index()
     {
-        return view('Lecturer::index');
+        return view('Employee::index');
     }
 
     public function store(Request $request)
@@ -86,7 +86,7 @@ class LecturerController extends Controller
         }
 
         if ($request->input('gender') == 'M' || $request->input('gender') == 'F') {
-            Lecturer::create([
+            Employee::create([
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
                 'age' => $request->input('age'),
@@ -104,7 +104,7 @@ class LecturerController extends Controller
     {
         $id = $request->input('id');
 
-        $lecturer = Lecturer::find($request->input('id'));
+        $lecturer = Employee::find($request->input('id'));
 
         if ($lecturer == null) {
             return response()->json(['message' => 'No lecturer found!']);
@@ -150,9 +150,9 @@ class LecturerController extends Controller
 
     public function export()
     {
-        Excel::store(new LecturerExport(), 'Employees.csv', 'public');
+        Excel::store(new EmployeeExport(), 'Employees.csv', 'public');
 
-        return new LecturerExport();
+        return new EmployeeExport();
     }
 
     public function seedingLecturer(Request $request)
@@ -160,7 +160,7 @@ class LecturerController extends Controller
         $faker = Factory::create();
 
         foreach (range(1, $request->input('data')) as $i) {
-            Lecturer::create([
+            Employee::create([
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
                 'gender' => $faker->randomElement(['M', 'F']),
@@ -175,7 +175,7 @@ class LecturerController extends Controller
 
     public function delete(Request $request)
     {
-        $lecturer = Lecturer::find($request->input('id'));
+        $lecturer = Employee::find($request->input('id'));
 
         if ($lecturer == null) {
             return response()->json(['message' => 'Data not found!']);
@@ -192,12 +192,12 @@ class LecturerController extends Controller
     public function frequency_index()
     {
         # code...
-        return view('Lecturer::frequency');
+        return view('Employee::frequency');
     }
 
     public function frequency_dataTables()
     {
-        $employees = Lecturer::query()->exclude(['created_at'])->get();
+        $employees = Employee::query()->exclude(['created_at'])->get();
 
         return DataTables::of($employees)
             ->addColumn('first_name', function ($employees) {

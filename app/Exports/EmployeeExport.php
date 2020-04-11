@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Modules\Backend\Lecturer\Models\Lecturer;
+use App\Modules\Backend\Employee\Models\Employee;
 use Illuminate\Contracts\Support\Responsable;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -14,7 +14,7 @@ use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
 
-class LecturerExport extends DefaultValueBinder implements WithCustomValueBinder, FromCollection, Responsable, WithHeadings, WithMapping
+class EmployeeExport extends DefaultValueBinder implements WithCustomValueBinder, FromCollection, Responsable, WithHeadings, WithMapping
 {
     use Exportable;
 

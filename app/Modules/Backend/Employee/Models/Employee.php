@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Modules\Backend\Lecturer\Models;
+namespace App\Modules\Backend\Employee\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
 use Webpatser\Uuid\Uuid;
 
-class Lecturer extends Model
+class Employee extends Model
 {
     protected $keyType = 'string';
 
     public $incrementing = false;
 
-    protected $table = 'lecturers';
+    protected $table = 'employees';
 
     protected $primaryKey = 'id';
 
@@ -31,7 +31,7 @@ class Lecturer extends Model
 
     protected function getColumns()
     {
-        $columns = Schema::getColumnListing('lecturers'); // translate_groups table
+        $columns = Schema::getColumnListing('employees'); // translate_groups table
 
         return $columns;
     }

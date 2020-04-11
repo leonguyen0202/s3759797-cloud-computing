@@ -4,7 +4,7 @@ $.ajaxSetup({
     }
 });
 
-clearModalOnClose('lecturerModal');
+clearModalOnClose('employeeModal');
 
 $(document).ready(function () {
     $('#big-query').DataTable({
@@ -46,7 +46,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#lecturers').DataTable({
+    $('#employees').DataTable({
         processing: true,
         serverSide: true,
         ajax: '/dashboard/employee/dataTables',
@@ -72,8 +72,8 @@ $(document).ready(function () {
                 name: 'age'
             },
             {
-                data: 'updated_at',
-                name: 'updated_at'
+                data: 'address',
+                name: 'address'
             },
             {
                 data: 'action',
@@ -134,9 +134,9 @@ $(document).ready(function () {
         }
     });
 
-    changeTitleAndAction('lecturerTableBtnAdd', 'lecturerModalLabel', 'Add new lecturer', 'lecturerModalButton', 'Add new', 'Add');
+    changeTitleAndAction('employeeTableBtnAdd', 'employeeModalLabel', 'Add new employee', 'employeeModalButton', 'Add new', 'Add');
 
-    $('#lecturerModalButton').click(function (e) {
+    $('#employeeModalButton').click(function (e) {
         e.preventDefault();
 
         if ($('#action').val() == 'Add') {
@@ -275,10 +275,10 @@ $(document).ready(function () {
     })
 });
 
-$(document).on('click', '.lecturerEdit', function(e) {
+$(document).on('click', '.employeeEdit', function(e) {
     e.preventDefault();
 
-    var parentElement = $(this).parent('.lecturerParent');
+    var parentElement = $(this).parent('.employeeParent');
 
     var id = $(parentElement).find('.id').val();
 
@@ -307,7 +307,7 @@ $(document).on('click', '.lecturerEdit', function(e) {
         },
         success: (data) => {
             Swal.disableLoading();
-            changeTitleAndAction('', 'lecturerModalLabel', 'Updating Lecturer', 'lecturerModalButton', 'Update', 'Edit');
+            changeTitleAndAction('', 'employeeModalLabel', 'Updating Employee', 'employeeModalButton', 'Update', 'Edit');
 
             $('#id').val(id);
 
@@ -330,10 +330,10 @@ $(document).on('click', '.lecturerEdit', function(e) {
     })
 })
 
-$(document).on('click', '.lecturerRemove', function (e) {
+$(document).on('click', '.employeeRemove', function (e) {
     e.preventDefault();
 
-    var parentElement = $(this).parent('.lecturerParent');
+    var parentElement = $(this).parent('.employeeParent');
 
     var id = $(parentElement).find('.id').val();
 
@@ -492,7 +492,7 @@ function changeTitleAndAction(buttonID, modalLabel, labelText, modalButton, butt
 
 function clearModalOnClose(classProps) {
     $('.' + classProps).on("hidden.bs.modal", function () {
-        if (classProps == 'lecturerModal') {
+        if (classProps == 'employeeModal') {
             $("input[name=first_name]").val("");
             $("input[name=last_name]").val("");
             $("input[name=age]").val("");

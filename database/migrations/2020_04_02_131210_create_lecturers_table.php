@@ -13,7 +13,7 @@ class CreateLecturersTable extends Migration
      */
     public function up()
     {
-        Schema::create('lecturers', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('first_name');
             $table->string('last_name');
@@ -34,7 +34,7 @@ class CreateLecturersTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::dropIfExists('lecturers');
+        Schema::dropIfExists('employees');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
